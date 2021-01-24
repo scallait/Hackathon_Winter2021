@@ -3,10 +3,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-public class SiteBlocker {
+public class siteBlocker {
     public void siteBlocker(String url) {
-        // Note that this code only works in Java 7+,
-        // refer to the above link about appending files for more info
 
         // Get OS name
         String OS = System.getProperty("os.name").toLowerCase();
@@ -27,9 +25,20 @@ public class SiteBlocker {
             System.exit(0);
         }
 
-        // Actually block site
-        Files.write(Paths.get(hostsFile),
-                ("127.0.0.1 " + url).getBytes(),
-                StandardOpenOption.APPEND);
+        try
+        {
+            //Actually block site
+            Files.write(Paths.get(hostsFile),
+                    ("127.0.0.1 " + url).getBytes(),
+                    StandardOpenOption.APPEND);
+
+            //Unblock site
+
+       }
+        catch (IOException ee)
+        {
+            System.out.println(ee.toString());
+        }
+
     }
 }
